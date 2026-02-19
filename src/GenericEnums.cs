@@ -1,7 +1,63 @@
 ﻿using System;
 
+#if !ANDROID
+	using System.Diagnostics;
+#endif
+
 namespace RD_AAOW
 	{
+#if !ANDROID
+
+	/// <summary>
+	/// Класс описывает общий внутренний метод проверки протокола библиотеки на соответствие
+	/// текущей версии приложения
+	/// </summary>
+	public static class LibraryProtocolChecker
+		{
+		/// <summary>
+		/// Метод проверяет соответствие между указанной версией протокола приложения и протоколом
+		/// общей библиотеки KassArrayDB
+		/// </summary>
+		/// <param name="DLLName">Имя файла библиотеки</param>
+		/// <param name="ProtocolVersion">Версия протокола экземпляра приложения</param>
+		/// <returns>Возвращает true, если версии совпадают</returns>
+		public static bool CheckProtocolVersion (string ProtocolVersion, string DLLName)
+			{
+			bool failure = false;
+			FileVersionInfo fvi = null;
+			try
+				{
+				fvi = FileVersionInfo.GetVersionInfo (RDGenerics.AppStartupPath + DLLName);
+				}
+			catch
+				{
+				failure = true;
+				}
+
+			if (!failure)
+				{
+				if (string.IsNullOrWhiteSpace (fvi.FileVersion))
+					failure = true;
+				else
+					failure = !fvi.FileVersion.EndsWith (ProtocolVersion) || (fvi.FileVersion[0] != ProtocolVersion[0]);
+				}
+
+			if (failure)
+				{
+				RDInterface.MessageBox (RDMessageFlags.Error | RDMessageFlags.CenterText | RDMessageFlags.LockSmallSize,
+					"Версия протокола данного приложения (" + ProtocolVersion + ") не совместима с версией библиотеки " +
+					DLLName + "." + RDLocale.RNRN +
+					"Выполните повторную развёртку продукта, после чего повторите попытку");
+
+				return false;
+				}
+
+			return true;
+			}
+		}
+
+#endif
+
 	/// <summary>
 	/// Поддерживаемые версии ФФД
 	/// </summary>

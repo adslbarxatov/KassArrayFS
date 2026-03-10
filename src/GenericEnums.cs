@@ -34,22 +34,52 @@ namespace RD_AAOW
 				failure = true;
 				}
 
+			// Контроль версии протокола
+			string[] fviVersion = [];
 			if (!failure)
 				{
 				if (string.IsNullOrWhiteSpace (fvi.FileVersion))
+					{
 					failure = true;
+					}
 				else
-					failure = !fvi.FileVersion.EndsWith (ProtocolVersion) || (fvi.FileVersion[0] != ProtocolVersion[0]);
+					{
+					string v = fvi.FileVersion;
+					fviVersion = v.Split (['.'], StringSplitOptions.RemoveEmptyEntries);
+
+					if (fviVersion.Length != 4)
+						failure = true;
+					else
+						failure = (fviVersion[3] != ProtocolVersion);
+					}
 				}
 
 			if (failure)
 				{
 				RDInterface.MessageBox (RDMessageFlags.Error | RDMessageFlags.CenterText | RDMessageFlags.LockSmallSize,
 					"Версия протокола данного приложения (" + ProtocolVersion + ") не совместима с версией библиотеки " +
-					DLLName + "." + RDLocale.RNRN +
+					DLLName + (fviVersion.Length != 4 ? "" : " (" + fviVersion[3] + ")") + "." + RDLocale.RNRN +
 					"Выполните повторную развёртку продукта, после чего повторите попытку");
 
 				return false;
+				}
+
+			// Контроль превышения версии сборки
+			string[] appVersion = ProgramDescription.AssemblyVersion.Split (['.'], StringSplitOptions.RemoveEmptyEntries);
+			for (int i = 0; i < fviVersion.Length - 1; i++)
+				{
+				uint vl = uint.Parse (fviVersion[i]);
+				uint al = uint.Parse (appVersion[i]);
+
+				if (vl < al)
+					{
+					RDInterface.MessageBox (RDMessageFlags.Error | RDMessageFlags.CenterText | RDMessageFlags.LockSmallSize,
+						"Версия данного приложения (" + ProgramDescription.AssemblyVersion + ") не совместима с версией библиотеки " +
+						DLLName + " (" + fvi.FileVersion + ")." + RDLocale.RNRN +
+						"Выполните повторную развёртку продукта, после чего повторите попытку");
+
+					return false;
+					}
 				}
 
 			return true;
@@ -1058,6 +1088,7 @@ namespace RD_AAOW
 		ECv4 = 0x0304,
 		ECv5 = 0x0305,
 		ECv6 = 0x0306,
-		ECActual = ECv6,
+		ECv7 = 0x0307,
+		ECActual = ECv7,
 		}
 	}

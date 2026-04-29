@@ -6,14 +6,13 @@
 
 namespace RD_AAOW
 	{
+	/// <summary>
+	/// Класс содержит общие методы и свойства для всех компонентов KassArray
+	/// </summary>
+	public static class LibrarySupport
+		{
 #if !ANDROID
 
-	/// <summary>
-	/// Класс описывает общий внутренний метод проверки протокола библиотеки на соответствие
-	/// текущей версии приложения
-	/// </summary>
-	public static class LibraryProtocolChecker
-		{
 		/// <summary>
 		/// Метод проверяет соответствие между указанной версией протокола приложения и протоколом
 		/// общей библиотеки KassArrayDB
@@ -84,9 +83,20 @@ namespace RD_AAOW
 
 			return true;
 			}
-		}
 
 #endif
+
+		/// <summary>
+		/// Возвращает минимально допустимую дату для всех полей DateTimePicker в составе KassArray
+		/// </summary>
+		public static DateTime MinimumDatePickerValue
+			{
+			get
+				{
+				return new DateTime (2017, 1, 1, 0, 0, 0);
+				}
+			}
+		}
 
 	/// <summary>
 	/// Поддерживаемые версии ФФД

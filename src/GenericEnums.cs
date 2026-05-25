@@ -1054,7 +1054,7 @@ namespace RD_AAOW
 			}
 		}
 
-	/// <summary>
+	/*/// <summary>
 	/// Режимы кэширования статусов ФН
 	/// </summary>
 	public enum StatusesCacheModes
@@ -1073,7 +1073,7 @@ namespace RD_AAOW
 		/// Кэширование выполняется с сохранением в директорию выгрузок ФН
 		/// </summary>
 		RemoteCache = 2
-		}
+		}*/
 
 	/// <summary>
 	/// Доступные версии универсальных информационных баз программы
@@ -1083,10 +1083,11 @@ namespace RD_AAOW
 		// База сведений сохранённых реквизитов пользователей для бумажных заявлений
 		PRv1 = 0x0101,
 		PRv2 = 0x0102,
-		PRActual = PRv2,
+		PRv3 = 0x0103,
+		PRActual = PRv3,
 
 		// База кэшированных статусов и выгрузок ФН
-		FSv1 = 0x0201,
+		FSv1_ = 0x0201,	// Не поддерживается
 		FSv2 = 0x0202,
 		FSActual = FSv2,
 
@@ -1099,6 +1100,7 @@ namespace RD_AAOW
 		ECv5 = 0x0305,
 		ECv6 = 0x0306,
 		ECv7 = 0x0307,
-		ECActual = ECv7,
+		ECv8 = 0x0308,
+		ECActual = ECv8,
 		}
 	}

@@ -1081,5 +1081,9 @@ namespace RD_AAOW
 		ECv7 = 0x0307,
 		ECv8 = 0x0308,
 		ECActual = ECv8,
+
+		// Сохранённые данные из выгрузок ОФД
+		DAv1 = 0x0401,
+		DAActual = DAv1,
 		}
 	}

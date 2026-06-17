@@ -1057,7 +1057,7 @@ namespace RD_AAOW
 	/// <summary>
 	/// Доступные версии универсальных информационных баз программы
 	/// </summary>
-	public enum KAKBLVersions
+	public enum KAVersions
 		{
 		// База сведений сохранённых реквизитов пользователей для бумажных заявлений
 		PRv1 = 0x0101,
@@ -1084,6 +1084,13 @@ namespace RD_AAOW
 
 		// Сохранённые данные из выгрузок ОФД
 		DAv1 = 0x0401,
-		DAActual = DAv1,
+		DAv2 = 0x0402,
+		DAv3 = 0x0403,
+		DAActual = DAv3,
+
+		// Внутренний формат сохранения выгрузок ФН
+		FDv1 = 0x0501,
+		FDv2 = 0x0502,
+		FDActual = FDv2,
 		}
 	}

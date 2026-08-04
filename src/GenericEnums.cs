@@ -26,7 +26,7 @@ namespace RD_AAOW
 			FileVersionInfo fvi = null;
 			try
 				{
-				fvi = FileVersionInfo.GetVersionInfo (RDGenerics.AppStartupPath + DLLName);
+				fvi = FileVersionInfo.GetVersionInfo (RDGenerics.StartupPath + DLLName);
 				}
 			catch
 				{
@@ -1052,45 +1052,5 @@ namespace RD_AAOW
 			searchLine = PSearchLine;
 			flags = PFlags;
 			}
-		}
-
-	/// <summary>
-	/// Доступные версии универсальных информационных баз программы
-	/// </summary>
-	public enum KAVersions
-		{
-		// База сведений сохранённых реквизитов пользователей для бумажных заявлений
-		PRv1_ = 0x0101,	// Не поддерживается с 18.06.26
-		PRv2 = 0x0102,
-		PRv3 = 0x0103,
-		PRActual = PRv3,
-
-		// База кэшированных статусов и выгрузок ФН
-		FSv1_ = 0x0201,	// Не поддерживается
-		FSv2 = 0x0202,
-		FSActual = FSv2,
-
-		// База контролируемых сроков действия ФН и тарифов ОФД
-		ECv1_ = 0x0301,	// Не поддерживается
-		ECv2_ = 0x0302,	// Не поддерживается с 18.06.26
-		ECv3_ = 0x0303,	// Не поддерживается с 18.06.26
-
-		ECv4_ = 0x0304,	// Не поддерживается с 18.06.26
-		ECv5_ = 0x0305,	// Не поддерживается с 18.06.26
-		ECv6 = 0x0306,
-		ECv7 = 0x0307,
-		ECv8 = 0x0308,
-		ECActual = ECv8,
-
-		// Сохранённые данные из выгрузок ОФД
-		DAv1 = 0x0401,
-		DAv2 = 0x0402,
-		DAv3 = 0x0403,
-		DAActual = DAv3,
-
-		// Внутренний формат сохранения выгрузок ФН
-		FDv1 = 0x0501,
-		FDv2 = 0x0502,
-		FDActual = FDv2,
 		}
 	}
